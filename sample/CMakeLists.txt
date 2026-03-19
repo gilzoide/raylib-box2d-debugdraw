@@ -1,0 +1,2 @@
+add_executable(raylib_box2d_debugdraw_sample "main.c")
+target_link_libraries(raylib_box2d_debugdraw_sample PRIVATE raylib_box2d_debugdraw)
