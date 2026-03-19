@@ -86,13 +86,21 @@ int main() {
 	debug_draw.drawBounds = true;
 	debug_draw.drawContacts = true;
 
+	bool is_paused = false;
 	while (!WindowShouldClose()) {
+		// UPDATE
+		if (IsKeyPressed(KEY_P)) {
+			is_paused = !is_paused;
+		}
+
+		if (!is_paused) {
+			b2World_Step(world, 1.0 / PHYSICS_FPS, 4);
+		}
+
+		// DRAW
 		BeginDrawing();
-		ClearBackground(RAYWHITE);
-
-		b2World_Step(world, 1.0 / PHYSICS_FPS, 4);
-		b2World_Draw(world, &debug_draw);
-
+			ClearBackground(RAYWHITE);
+			b2World_Draw(world, &debug_draw);
 		EndDrawing();
 	}
 	CloseWindow();
