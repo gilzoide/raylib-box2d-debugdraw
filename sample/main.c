@@ -31,7 +31,7 @@ int main() {
 	// Box (polygon)
 	b2BodyDef box_body_def = b2DefaultBodyDef();
 	box_body_def.type = b2_dynamicBody;
-	box_body_def.position = (b2Vec2){ WINDOW_WIDTH * 0.25, 100 };
+	box_body_def.position = (b2Vec2){ WINDOW_WIDTH * 0.2, 100 };
 	box_body_def.rotation = b2MakeRot(PI / 3);
 	box_body_def.name = "box";
 	b2BodyId box_body = b2CreateBody(world, &box_body_def);
@@ -39,10 +39,21 @@ int main() {
 	b2ShapeDef box_shape_def = b2DefaultShapeDef();
 	b2ShapeId box_shape = b2CreatePolygonShape(box_body, &box_shape_def, &box_poly);
 
+	// Rounded box (polygon)
+	b2BodyDef rounded_box_body_def = b2DefaultBodyDef();
+	rounded_box_body_def.type = b2_dynamicBody;
+	rounded_box_body_def.position = (b2Vec2){ WINDOW_WIDTH * 0.4, 100 };
+	rounded_box_body_def.rotation = b2MakeRot(PI / 3);
+	rounded_box_body_def.name = "rounded_box";
+	b2BodyId rounded_box_body = b2CreateBody(world, &rounded_box_body_def);
+	b2Polygon rounded_box_poly = b2MakeRoundedBox(20, 20, 10);
+	b2ShapeDef rounded_box_shape_def = b2DefaultShapeDef();
+	b2ShapeId rounded_box_shape = b2CreatePolygonShape(rounded_box_body, &rounded_box_shape_def, &rounded_box_poly);
+
 	// Ball (circle)
 	b2BodyDef ball_body_def = b2DefaultBodyDef();
 	ball_body_def.type = b2_dynamicBody;
-	ball_body_def.position = (b2Vec2){ WINDOW_WIDTH * 0.5, 100 };
+	ball_body_def.position = (b2Vec2){ WINDOW_WIDTH * 0.6, 100 };
 	ball_body_def.name = "ball";
 	b2BodyId ball_body = b2CreateBody(world, &ball_body_def);
 	b2Circle ball_circle = {
@@ -56,7 +67,7 @@ int main() {
 	// Capsule
 	b2BodyDef capsule_body_def = b2DefaultBodyDef();
 	capsule_body_def.type = b2_dynamicBody;
-	capsule_body_def.position = (b2Vec2){ WINDOW_WIDTH * 0.75, 100 };
+	capsule_body_def.position = (b2Vec2){ WINDOW_WIDTH * 0.8, 100 };
 	capsule_body_def.name = "capsule";
 	b2BodyId capsule_body = b2CreateBody(world, &capsule_body_def);
 	b2Capsule capsule_circle = {

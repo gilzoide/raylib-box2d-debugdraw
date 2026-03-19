@@ -20,12 +20,22 @@ static Vector2 to_raylib_vector2(b2Vec2 b2vec) {
 	return raylib_vec;
 }
 
+static b2Vec2 to_b2Vec2(Vector2 rlvec) {
+	b2Vec2 b2vec = {
+		rlvec.x,
+		rlvec.y,
+	};
+	return b2vec;
+}
+
 static Color highlight_color(Color c) {
 	const float light_factor = 0.75;
 	Color tint = { 255 * light_factor, 255 * light_factor, 255 * light_factor, 255 };
 	Color highlighted_color = ColorTint(c, tint);
 	return highlighted_color;
 }
+
+static void DrawSolidCapsuleFcn(b2Vec2 b2p1, b2Vec2 b2p2, float radius, b2HexColor b2color, void* context);
 
 /// Draw a closed polygon provided in CCW order.
 static void DrawPolygonFcn(const b2Vec2* vertices, int vertexCount, b2HexColor b2color, void* context) {
@@ -48,6 +58,12 @@ static void DrawSolidPolygonFcn(b2Transform transform, const b2Vec2* vertices, i
 
 	Color color = to_raylib_color(b2color);
 	DrawTriangleStrip(transformed_vertices, vertexCount + 1, color);
+
+	if (radius > 0) {
+		for (int i = 0; i < vertexCount; i++) {
+			DrawSolidCapsuleFcn(to_b2Vec2(transformed_vertices[i]), to_b2Vec2(transformed_vertices[i + 1]), radius, b2color, context);
+		}
+	}
 }
 
 /// Draw a circle.
