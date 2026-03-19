@@ -68,9 +68,26 @@ static void DrawSolidCircleFcn(b2Transform transform, float radius, b2HexColor b
 }
 
 /// Draw a solid capsule.
-static void DrawSolidCapsuleFcn(b2Vec2 p1, b2Vec2 p2, float radius, b2HexColor b2color, void* context) {
+static void DrawSolidCapsuleFcn(b2Vec2 b2p1, b2Vec2 b2p2, float radius, b2HexColor b2color, void* context) {
 	Color color = to_raylib_color(b2color);
-	// TODO
+	DrawCircleV(to_raylib_vector2(b2p1), radius, color);
+	DrawCircleV(to_raylib_vector2(b2p2), radius, color);
+
+	// Draw center as a polygon
+	b2Vec2 center = b2Lerp(b2p1, b2p2, 0.5);
+	b2Vec2 delta = b2Sub(b2p2, b2p1);
+	float length = b2Length(delta);
+	b2Transform transform = {
+		center,
+		{ delta.x / length, delta.y / length },
+	};
+	b2Vec2 points[] = {
+		{ -length / 2, radius },
+		{ -length / 2, -radius },
+		{ length / 2, -radius },
+		{ length / 2, radius },
+	};
+	DrawSolidPolygonFcn(transform, points, 4, 0, b2color, context);
 }
 
 /// Draw a line segment.
