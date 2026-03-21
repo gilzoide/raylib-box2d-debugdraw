@@ -90,6 +90,10 @@ int main() {
 	debug_draw.drawShapes = true;
 	debug_draw.drawBounds = true;
 	debug_draw.drawContacts = true;
+	b2RaylibDebugDrawConfig debug_draw_config = {
+        .fontSize = 20,
+    };
+	debug_draw.context = &debug_draw_config;
 
 	bool is_paused = false;
 	while (!WindowShouldClose()) {

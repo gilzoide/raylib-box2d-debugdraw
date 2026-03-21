@@ -1,5 +1,5 @@
 # Raylib Box2D Debug Draw
-Implementation of [Box2D](https://box2d.org/)'s `b2DebugDraw` using [raylib](https://www.raylib.com/) for drawing.
+Implementation of [Box2D](https://box2d.org/)'s `b2DebugDraw` using [Raylib](https://www.raylib.com/) for drawing.
 
 Use this in games made with raylib for debug drawing Box2D worlds.
 
@@ -20,8 +20,14 @@ void debug_draw_box2d_world(b2WorldId world) {
     debug_draw.drawShapes = true;
     debug_draw.drawBounds = true;
     debug_draw.drawContacts = true;
+
+    // 3. (optional) Configure font size and Transform axis colors and length
+    b2RaylibDebugDrawConfig debug_draw_config = {
+        .fontSize = 20,
+    };
+    debug_draw.context = &debug_draw_config;
     
-    // 3. Call b2World_Draw to debug draw the world
+    // 4. Call b2World_Draw to debug draw the world
     b2World_Draw(world, &debug_draw);
 }
 
