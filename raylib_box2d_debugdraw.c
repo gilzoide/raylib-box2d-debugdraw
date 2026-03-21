@@ -26,13 +26,6 @@ static b2Vec2 to_b2Vec2(Vector2 rlvec) {
 	return b2vec;
 }
 
-static Color highlight_color(Color c) {
-	const float light_factor = 0.75;
-	Color tint = { 255 * light_factor, 255 * light_factor, 255 * light_factor, 255 };
-	Color highlighted_color = ColorTint(c, tint);
-	return highlighted_color;
-}
-
 static b2RaylibDebugDrawConfig get_draw_config(void *context) {
 	if (context) {
 		return *(b2RaylibDebugDrawConfig *) context;
