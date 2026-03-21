@@ -18,7 +18,7 @@ int main() {
 	// Floor segment
 	b2BodyDef floor_body_def = b2DefaultBodyDef();
 	floor_body_def.type = b2_staticBody;
-	floor_body_def.position = (b2Vec2){ 0, WINDOW_HEIGHT - 20 };
+	floor_body_def.position = (b2Vec2){ 0, WINDOW_HEIGHT - 30 };
 	floor_body_def.name = "floor";
 	b2BodyId floor_body = b2CreateBody(world, &floor_body_def);
 	b2Segment floor_segment = {
@@ -100,6 +100,7 @@ int main() {
 		// DRAW
 		BeginDrawing();
 			ClearBackground(RAYWHITE);
+			DrawText("Press P to pause simulation", 2, 2, 16, BLACK);
 			b2World_Draw(world, &debug_draw);
 		EndDrawing();
 	}
