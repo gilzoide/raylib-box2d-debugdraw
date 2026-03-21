@@ -1,5 +1,5 @@
-#include <raylib.h>
 #include <box2d/box2d.h>
+#include <raylib.h>
 #include <raylib_box2d_debugdraw.h>
 
 #define WINDOW_WIDTH 800
