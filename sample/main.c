@@ -6,11 +6,7 @@
 #define WINDOW_HEIGHT 600
 #define PHYSICS_FPS 60
 
-int main() {
-	SetConfigFlags(FLAG_VSYNC_HINT);
-	InitWindow(WINDOW_WIDTH, WINDOW_HEIGHT, "Raylib + Box2D debug draw");
-
-	// World
+static b2WorldId create_world() {
 	b2WorldDef world_def = b2DefaultWorldDef();
 	world_def.gravity.y = 50;
 	b2WorldId world = b2CreateWorld(&world_def);
@@ -78,6 +74,15 @@ int main() {
 	b2ShapeDef capsule_shape_def = b2DefaultShapeDef();
 	capsule_shape_def.density = 10;
 	b2ShapeId capsule_shape = b2CreateCapsuleShape(capsule_body, &capsule_shape_def, &capsule_circle);
+
+	return world;
+}
+
+int main() {
+	SetConfigFlags(FLAG_VSYNC_HINT);
+	InitWindow(WINDOW_WIDTH, WINDOW_HEIGHT, "Raylib + Box2D debug draw");
+
+	b2WorldId world = create_world();
 
 	// Debug draw configuration
 	b2DebugDraw debug_draw = b2RaylibDebugDraw();
