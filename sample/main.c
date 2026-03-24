@@ -8,7 +8,7 @@
 
 static b2WorldId create_world() {
 	b2WorldDef world_def = b2DefaultWorldDef();
-	world_def.gravity.y = 50;
+	world_def.gravity.y = 100;
 	b2WorldId world = b2CreateWorld(&world_def);
 
 	// Floor segment
