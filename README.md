@@ -3,6 +3,8 @@ Implementation of [Box2D](https://box2d.org/)'s `b2DebugDraw` using [Raylib](htt
 
 Use this in games made with raylib for debug drawing Box2D worlds.
 
+<video src="sample/raylib-box2d-debugdraw-demo.mp4" />
+
 
 ## Usage example
 ```c
