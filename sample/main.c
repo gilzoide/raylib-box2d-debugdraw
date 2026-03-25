@@ -5,6 +5,7 @@
 #define WINDOW_WIDTH 800
 #define WINDOW_HEIGHT 600
 #define PHYSICS_FPS 60
+#define PHYSICS_TIMESTEP (1.0 / PHYSICS_FPS)
 
 static b2WorldId create_world() {
 	b2WorldDef world_def = b2DefaultWorldDef();
@@ -79,7 +80,6 @@ static b2WorldId create_world() {
 }
 
 int main() {
-	SetConfigFlags(FLAG_VSYNC_HINT);
 	InitWindow(WINDOW_WIDTH, WINDOW_HEIGHT, "Raylib + Box2D debug draw");
 
 	b2WorldId world = create_world();
@@ -95,6 +95,7 @@ int main() {
     };
 	debug_draw.context = &debug_draw_config;
 
+	float accumulated_frame_time = 0;
 	bool is_paused = false;
 	while (!WindowShouldClose()) {
 		// UPDATE
@@ -103,7 +104,11 @@ int main() {
 		}
 
 		if (!is_paused) {
-			b2World_Step(world, 1.0 / PHYSICS_FPS, 4);
+			accumulated_frame_time += GetFrameTime();
+			while (accumulated_frame_time >= PHYSICS_TIMESTEP) {
+				b2World_Step(world, PHYSICS_TIMESTEP, 4);
+				accumulated_frame_time -= PHYSICS_TIMESTEP;
+			}
 		}
 
 		// DRAW
